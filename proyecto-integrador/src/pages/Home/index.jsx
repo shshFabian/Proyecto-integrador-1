@@ -12,6 +12,13 @@ import {
 } from '@heroicons/react/outline';
 import TaskPreviewModal from '../../components/tasks/TaskPreviewModal';
 
+const PRODUCTIVITY_TIPS = [
+  "Haz primero lo difícil: lo que más evitas, hazlo primero.",
+  "Empieza aunque no tengas ganas: la acción crea motivación.",
+  "No busques perfección: busca avanzar.",
+  "Tu ambiente define tu productividad: ordena tu espacio."
+];
+
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,6 +29,7 @@ const Home = () => {
     overdue: 0
   });
   const [selectedTask, setSelectedTask] = useState(null);
+  const [currentTipIndex, setCurrentTipIndex] = useState(0);
 
   const handleTaskClick = (task) => {
     setSelectedTask(task);
@@ -29,6 +37,14 @@ const Home = () => {
 
   useEffect(() => {
     loadTasks();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTipIndex((prevIndex) => (prevIndex + 1) % PRODUCTIVITY_TIPS.length);
+    }, 600000); // 10 minutes
+
+    return () => clearInterval(interval);
   }, []);
 
   const loadTasks = async () => {
@@ -149,9 +165,8 @@ const Home = () => {
             <h3 className="text-lg font-semibold text-slate-900 mb-2">
               Consejo de Productividad
             </h3>
-            <p className="text-sm text-gray-700">
-              Organiza tus tareas por prioridad y establece fechas límite realistas.
-              Revisa tu calendario diariamente para mantenerte al día con tus compromisos.
+            <p className="text-sm text-gray-700 font-medium">
+              {PRODUCTIVITY_TIPS[currentTipIndex]}
             </p>
           </div>
         </div>

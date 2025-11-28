@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MenuIcon, XIcon, HomeIcon, ClipboardListIcon, CalendarIcon, UserCircleIcon } from '@heroicons/react/outline';
 
+import LogoIcon from '../common/LogoIcon';
+
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -21,8 +23,8 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
-                <ClipboardListIcon className="h-5 w-5 text-white" />
+              <div className="w-8 h-8 flex items-center justify-center text-slate-900">
+                <LogoIcon className="w-full h-full" />
               </div>
               <span className="text-xl font-semibold text-slate-900 hidden sm:block">TaskManager</span>
             </Link>
@@ -37,8 +39,8 @@ const Header = () => {
                     key={link.path}
                     to={link.path}
                     className={`relative px-4 py-2 text-sm font-medium transition-all flex items-center space-x-2 ${active
-                        ? 'text-slate-900'
-                        : 'text-gray-600 hover:text-slate-900'
+                      ? 'text-slate-900'
+                      : 'text-gray-600 hover:text-slate-900'
                       }`}
                   >
                     <Icon className="h-5 w-5" />
@@ -75,9 +77,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white animate-slideUp">
+        <div className="md:hidden fixed inset-0 top-16 z-40 bg-white animate-slideUp overflow-y-auto">
           <div className="px-4 py-3 space-y-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
@@ -88,8 +89,8 @@ const Header = () => {
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center space-x-3 px-4 py-3 rounded-md text-sm font-medium transition-all ${active
-                      ? 'bg-slate-100 text-slate-900'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-slate-900'
+                    ? 'bg-slate-100 text-slate-900'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-slate-900'
                     }`}
                 >
                   <Icon className="h-5 w-5" />

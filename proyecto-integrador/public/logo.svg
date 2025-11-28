@@ -1,0 +1,47 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Circle -->
+  <circle cx="50" cy="50" r="45" stroke="black" stroke-width="5" />
+  
+  <!-- Book -->
+  <path
+    d="M25 35 
+       C 25 35, 45 35, 50 40
+       C 55 35, 75 35, 75 35
+       V 75
+       C 75 75, 55 75, 50 80
+       C 45 75, 25 75, 25 75
+       Z"
+    stroke="black"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Book Spine Line -->
+  <path d="M50 40 V 80" stroke="black" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Checkmark (Left Page) -->
+  <path
+    d="M32 55 L 38 60 L 45 50"
+    stroke="black"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Lines (Right Page) -->
+  <path d="M58 50 H 70" stroke="black" stroke-width="3" stroke-linecap="round" />
+  <path d="M58 60 H 70" stroke="black" stroke-width="3" stroke-linecap="round" />
+  <path d="M58 70 H 66" stroke="black" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Pencil -->
+  <path
+    d="M65 30 L 80 15 L 90 25 L 75 40"
+    stroke="black"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="black"
+  />
+  <!-- Pencil Tip -->
+  <path d="M65 30 L 62 43 L 75 40" stroke="black" stroke-width="2" fill="black" />
+</svg>
