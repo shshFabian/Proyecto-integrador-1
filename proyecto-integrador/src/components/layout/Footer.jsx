@@ -46,13 +46,13 @@ const Footer = () => {
                     <div>
                         <h3 className="text-sm font-semibold text-white mb-4">Contacto</h3>
                         <p className="text-sm text-gray-400 mb-3">
-                            Soporte empresarial disponible
+                            Soporte disponible
                         </p>
                         <a
                             href="mailto:soporte@taskmanager.com"
                             className="text-sm text-gray-400 hover:text-white transition-colors"
                         >
-                            soporte@taskmanager.com
+                            fabianroqueminaya@gmail.com
                         </a>
                     </div>
                 </div>

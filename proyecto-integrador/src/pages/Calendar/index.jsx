@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import DayModal from '../../components/calendar/DayModal';
 import MiniCalendar from '../../components/calendar/MiniCalendar';
 import CalendarStats from '../../components/calendar/CalendarStats';
+import { isOverdue } from '../../utils/dateUtils';
 
 const CalendarPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -211,8 +212,8 @@ const CalendarPage = () => {
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${showFilters
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
             >
               <FilterIcon className="h-5 w-5" />
@@ -222,8 +223,8 @@ const CalendarPage = () => {
               <button
                 onClick={() => setViewMode('month')}
                 className={`px-3 py-2 rounded-md transition-all flex items-center gap-2 ${viewMode === 'month'
-                    ? 'bg-white shadow-sm text-blue-600'
-                    : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white shadow-sm text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
                   }`}
               >
                 <ViewGridIcon className="h-5 w-5" />
@@ -232,8 +233,8 @@ const CalendarPage = () => {
               <button
                 onClick={() => setViewMode('week')}
                 className={`px-3 py-2 rounded-md transition-all flex items-center gap-2 ${viewMode === 'week'
-                    ? 'bg-white shadow-sm text-blue-600'
-                    : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white shadow-sm text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
                   }`}
               >
                 <ViewListIcon className="h-5 w-5" />
@@ -252,8 +253,8 @@ const CalendarPage = () => {
                 <button
                   onClick={() => setFilterStatus('all')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filterStatus === 'all'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                 >
                   Todas
@@ -261,8 +262,8 @@ const CalendarPage = () => {
                 <button
                   onClick={() => setFilterStatus('pending')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filterStatus === 'pending'
-                      ? 'bg-yellow-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-yellow-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                 >
                   Pendientes
@@ -270,8 +271,8 @@ const CalendarPage = () => {
                 <button
                   onClick={() => setFilterStatus('completed')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filterStatus === 'completed'
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                 >
                   Completadas
@@ -353,24 +354,24 @@ const CalendarPage = () => {
                         key={index}
                         onClick={() => setSelectedDate(date)}
                         className={`min-h-[80px] sm:min-h-[120px] border-r border-b border-gray-200 last:border-r-0 p-1 sm:p-2 transition-all hover:shadow-lg hover:z-10 relative group ${!isCurrentMonth
-                            ? 'bg-gray-50'
-                            : isTodayDate
-                              ? 'bg-gradient-to-br from-blue-50 to-blue-100 ring-2 ring-blue-400 ring-inset'
-                              : isOverdue
-                                ? 'bg-red-50'
-                                : 'bg-white hover:bg-blue-50'
+                          ? 'bg-gray-50'
+                          : isTodayDate
+                            ? 'bg-gradient-to-br from-blue-50 to-blue-100 ring-2 ring-blue-400 ring-inset'
+                            : isOverdue
+                              ? 'bg-red-50'
+                              : 'bg-white hover:bg-blue-50'
                           }`}
                       >
                         {/* Day Number */}
                         <div className="flex justify-between items-start mb-1">
                           <span
                             className={`text-xs sm:text-sm font-semibold transition-all ${!isCurrentMonth
-                                ? 'text-gray-400'
-                                : isTodayDate
-                                  ? 'text-white bg-blue-600 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center shadow-md'
-                                  : isOverdue
-                                    ? 'text-red-600'
-                                    : 'text-gray-900'
+                              ? 'text-gray-400'
+                              : isTodayDate
+                                ? 'text-white bg-blue-600 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center shadow-md'
+                                : isOverdue
+                                  ? 'text-red-600'
+                                  : 'text-gray-900'
                               }`}
                           >
                             {day}
@@ -399,8 +400,8 @@ const CalendarPage = () => {
                             <div
                               key={task.id}
                               className={`text-xs px-1.5 py-0.5 rounded truncate border transition-all ${task.completed
-                                  ? 'bg-green-100 text-green-800 border-green-200 line-through opacity-75'
-                                  : getPriorityColor(task.priority)
+                                ? 'bg-green-100 text-green-800 border-green-200 line-through opacity-75'
+                                : getPriorityColor(task.priority)
                                 }`}
                               title={task.title}
                             >
@@ -446,10 +447,10 @@ const CalendarPage = () => {
                       <div
                         key={idx}
                         className={`rounded-lg border-2 p-3 transition-all ${isTodayDate
-                            ? 'border-blue-500 bg-blue-50'
-                            : isOverdue
-                              ? 'border-red-300 bg-red-50'
-                              : 'border-gray-200 bg-white'
+                          ? 'border-blue-500 bg-blue-50'
+                          : isOverdue
+                            ? 'border-red-300 bg-red-50'
+                            : 'border-gray-200 bg-white'
                           }`}
                       >
                         <div className="text-center mb-3">
@@ -466,8 +467,8 @@ const CalendarPage = () => {
                               key={task.id}
                               onClick={() => setSelectedDate(date)}
                               className={`w-full text-left text-xs px-2 py-2 rounded border transition-all hover:shadow-md ${task.completed
-                                  ? 'bg-green-100 text-green-800 border-green-200 line-through'
-                                  : getPriorityColor(task.priority)
+                                ? 'bg-green-100 text-green-800 border-green-200 line-through'
+                                : getPriorityColor(task.priority)
                                 }`}
                             >
                               <div className="font-medium truncate">{task.title}</div>
@@ -586,14 +587,16 @@ const CalendarPage = () => {
                   .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
                   .slice(0, 5)
                   .map(task => {
-                    const dueDate = new Date(task.dueDate);
-                    const isOverdue = dueDate < new Date();
+                    const isTaskOverdue = isOverdue(task.dueDate);
+                    const [year, month, day] = task.dueDate.split('-').map(Number);
+                    const dueDate = new Date(year, month - 1, day);
+
                     return (
                       <div
                         key={task.id}
-                        className={`p-2 rounded-lg border text-xs ${isOverdue
-                            ? 'bg-red-50 border-red-200'
-                            : getPriorityColor(task.priority)
+                        className={`p-2 rounded-lg border text-xs ${isTaskOverdue
+                          ? 'bg-red-50 border-red-200'
+                          : getPriorityColor(task.priority)
                           }`}
                       >
                         <div className="font-medium truncate">{task.title}</div>
@@ -631,4 +634,3 @@ const CalendarPage = () => {
 };
 
 export default CalendarPage;
-

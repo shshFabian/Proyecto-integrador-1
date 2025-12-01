@@ -11,6 +11,7 @@ import {
   ExclamationCircleIcon
 } from '@heroicons/react/outline';
 import TaskPreviewModal from '../../components/tasks/TaskPreviewModal';
+import { isOverdue } from '../../utils/dateUtils';
 
 const PRODUCTIVITY_TIPS = [
   "Haz primero lo difícil: lo que más evitas, hazlo primero.",
@@ -71,17 +72,12 @@ const Home = () => {
   };
 
   const calculateStats = (taskList) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
     const total = taskList.length;
     const completed = taskList.filter(t => t.completed).length;
     const pending = taskList.filter(t => !t.completed).length;
     const overdue = taskList.filter(t => {
       if (t.completed || !t.dueDate) return false;
-      const [year, month, day] = t.dueDate.split('-').map(Number);
-      const dueDate = new Date(year, month - 1, day);
-      return dueDate < today;
+      return isOverdue(t.dueDate);
     }).length;
 
     setStats({ total, completed, pending, overdue });

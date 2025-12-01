@@ -1,22 +1,22 @@
 import React from 'react';
 import { CheckCircleIcon, ClockIcon, ExclamationIcon } from '@heroicons/react/outline';
+import { isOverdue } from '../../utils/dateUtils';
 
 const CalendarStats = ({ tasks, currentMonth, currentYear }) => {
   const monthTasks = tasks.filter(task => {
     if (!task.dueDate || task.deleted) return false;
-    const taskDate = new Date(task.dueDate);
+    // Parse date manually to avoid timezone issues
+    const [year, month, day] = task.dueDate.split('-').map(Number);
+    const taskDate = new Date(year, month - 1, day);
     return taskDate.getMonth() === currentMonth && taskDate.getFullYear() === currentYear;
   });
 
   const completed = monthTasks.filter(t => t.completed).length;
   const pending = monthTasks.filter(t => !t.completed).length;
-  
+
   const overdue = monthTasks.filter(t => {
     if (t.completed) return false;
-    const taskDate = new Date(t.dueDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return taskDate < today;
+    return isOverdue(t.dueDate);
   }).length;
 
   const stats = [

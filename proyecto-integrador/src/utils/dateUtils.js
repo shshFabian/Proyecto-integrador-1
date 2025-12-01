@@ -34,7 +34,12 @@ export const formatDate = (dateString, options = {}) => {
 export const isOverdue = (dateString) => {
     if (!dateString) return false;
 
-    const [year, month, day] = dateString.split('-').map(Number);
+    // Ensure we only look at the date part (YYYY-MM-DD)
+    // This handles both "YYYY-MM-DD" and ISO strings "YYYY-MM-DDTHH:mm:ss.sssZ"
+    const cleanDateStr = dateString.substring(0, 10);
+    const [year, month, day] = cleanDateStr.split('-').map(Number);
+
+    // Create date at 00:00:00 local time
     const dueDate = new Date(year, month - 1, day);
 
     const today = new Date();
