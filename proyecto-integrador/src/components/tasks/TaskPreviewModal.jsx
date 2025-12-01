@@ -1,5 +1,6 @@
 import React from 'react';
 import { XIcon, CalendarIcon, TagIcon, FlagIcon, CheckCircleIcon } from '@heroicons/react/outline';
+import { formatDate } from '../../utils/dateUtils';
 
 const TaskPreviewModal = ({ task, onClose }) => {
     if (!task) return null;
@@ -13,16 +14,7 @@ const TaskPreviewModal = ({ task, onClose }) => {
         }
     };
 
-    const formatDate = (dateString) => {
-        if (!dateString) return 'Sin fecha';
-        const date = new Date(dateString);
-        return date.toLocaleDateString('es-ES', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    };
+
 
     return (
         <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -65,7 +57,7 @@ const TaskPreviewModal = ({ task, onClose }) => {
                                     <CalendarIcon className="h-5 w-5 text-gray-400 mt-0.5" />
                                     <div>
                                         <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Límite</p>
-                                        <p className="text-sm font-semibold text-gray-900 mt-0.5">{formatDate(task.dueDate)}</p>
+                                        <p className="text-sm font-semibold text-gray-900 mt-0.5">{formatDate(task.dueDate, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                                     </div>
                                 </div>
 

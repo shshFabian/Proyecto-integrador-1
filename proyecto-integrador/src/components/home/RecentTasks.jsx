@@ -1,28 +1,19 @@
 import { Link } from 'react-router-dom';
 import { ClockIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/outline';
+import { formatDate, isOverdue } from '../../utils/dateUtils';
 
 const RecentTasks = ({ tasks, onTaskClick }) => {
   const getStatusIcon = (task) => {
     if (task.completed) {
       return <CheckCircleIcon className="h-5 w-5 text-green-600" />;
     }
-    const [year, month, day] = task.dueDate.split('-').map(Number);
-    const dueDate = new Date(year, month - 1, day);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (dueDate < today) {
+    if (isOverdue(task.dueDate)) {
       return <ExclamationCircleIcon className="h-5 w-5 text-red-600" />;
     }
     return <ClockIcon className="h-5 w-5 text-yellow-600" />;
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'short'
-    });
-  };
+
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 transition-colors duration-200">
@@ -71,7 +62,7 @@ const RecentTasks = ({ tasks, onTaskClick }) => {
                 )}
                 {task.dueDate && (
                   <p className="text-xs text-gray-500 mt-1">
-                    Vence: {formatDate(task.dueDate)}
+                    Vence: {formatDate(task.dueDate, { day: 'numeric', month: 'short' })}
                   </p>
                 )}
               </div>

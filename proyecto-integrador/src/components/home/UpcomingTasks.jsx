@@ -1,4 +1,5 @@
 import { CalendarIcon } from '@heroicons/react/outline';
+import { formatDate as formatTaskDate } from '../../utils/dateUtils';
 
 const UpcomingTasks = ({ tasks, onTaskClick }) => {
   const today = new Date();
@@ -28,7 +29,7 @@ const UpcomingTasks = ({ tasks, onTaskClick }) => {
     if (diffDays === 1) return 'Mañana';
     if (diffDays <= 7) return `En ${diffDays} días`;
 
-    return date.toLocaleDateString('es-ES', {
+    return formatTaskDate(dateString, {
       day: 'numeric',
       month: 'short'
     });

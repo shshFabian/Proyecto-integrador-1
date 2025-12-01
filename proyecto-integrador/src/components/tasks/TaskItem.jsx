@@ -1,5 +1,6 @@
 import React from 'react';
 import { PencilIcon, TrashIcon, CheckIcon, CalendarIcon } from '@heroicons/react/outline';
+import { formatDate } from '../../utils/dateUtils';
 
 const TaskItem = ({
   task,
@@ -78,11 +79,7 @@ const TaskItem = ({
                 <div className={`flex items-center text-xs font-medium ${task.completed ? 'text-gray-400' : 'text-gray-500'
                   }`}>
                   <CalendarIcon className="w-4 h-4 mr-1.5 text-gray-400" />
-                  {new Date(task.dueDate).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                  })}
+                  {formatDate(task.dueDate)}
                 </div>
               )}
             </div>
